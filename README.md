@@ -140,11 +140,10 @@ applewatch.addListener("from_watch_queue", function (message) {
 ```swift
 // assumes your WatchKit extension references Wormhole.h in a Bridging-Header.h file
 
-let watchConnectivityListeningWormhole = MMWormholeSession.sharedListeningSession();
-watchConnectivityListeningWormhole.activateSessionListening();
+let watchConnectivityListeningWormhole = MMWormholeSession.sharedListening();
+watchConnectivityListeningWormhole.activateListening();
 
-let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil, transitingType: .SessionContext);
-
+let wormhole = MMWormhole(applicationGroupIdentifier: "group.com.yourcompany", optionalDirectory: nil, transitingType: .sessionContext);
 ```
 
 #### Send a message (WatchKit extension, swift)
@@ -160,7 +159,7 @@ wormhole.passMessageObject("titleString", identifier: "from_watch_queue")
 ```swift
 // assumes wormhole is initialised (above)
 
-watchConnectivityListeningWormhole.listenForMessageWithIdentifier("from_phone_queue", listener: { (messageObject) -> Void in
+watchConnectivityListeningWormhole.listenForMessage(withIdentifier: "from_phone_queue", listener: { (messageObject) -> Void in
     if let message: AnyObject = messageObject {
         // handle your message here
     }
